@@ -1,0 +1,11 @@
+﻿@using WebAppAspNetMvcHtml.Models;
+@model AvailableDocument
+
+<h3>Добавление документа</h3>
+
+@using (Html.BeginForm("Create", "AvailableDocuments", FormMethod.Post))
+{
+    @Html.EditorForModel()
+    <input type="submit" value="Сохранить" />
+    @Html.ActionLink("Отменить", "Index", "AvailableDocuments")
+}

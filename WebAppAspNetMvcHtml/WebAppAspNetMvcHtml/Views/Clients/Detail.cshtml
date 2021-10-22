@@ -1,0 +1,90 @@
+﻿@using WebAppAspNetMvcHtml.Models
+@using WebAppAspNetMvcHtml.Extentions;
+@model Client
+
+
+<table>
+    <tbody>
+        <tr>
+            <td rowspan="2">
+                <img src="/Clients/GetImage/@Model.Id" style="max-width: 300px; max-height: 600px; border: 1px solid #000000;" />
+            </td>
+
+            <td>
+                <h1><u>@($"{Model.Name} {Model.Surname}")</u></h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    <span><b>Возраст:</b></span>
+                    <span>@Model.Age</span>
+                </p>
+                <p>
+                    <span><b>Дата рождения:</b></span>
+                    <span>@(Model.Birthday.HasValue? Model.Birthday.Value.ToString("dd.MM.yyyy") : "-")</span>
+                </p>
+                <p>
+                    <span><b>Пол:</b></span>
+                    <span>@Model.Gender.GetDisplayValue()</span>
+                </p>
+                <p>
+                    <span><b>Тип клиента:</b></span>
+                    <span>@Model.ClientTypes.Name</span>
+                </p>
+                <p>
+                    @{ var citizenships = string.Join(", ", Model.Citizenships.Select(x => $"{x.Name}"));
+                        if (string.IsNullOrEmpty(citizenships))
+                        {
+                            citizenships = "Нет информации";
+                        } }
+
+                    <span><sup><b>Гражданство:</b></sup></span>
+                    <span>@citizenships</span>
+                </p>
+                <p>
+                    @{ var orders = string.Join(", ", Model.Orders.Select(x => $"{x.Procedure} {x.Datetime.ToString("dd.MM.yyyy H:mm")}"));
+                        if (string.IsNullOrEmpty(orders))
+                        {
+                            orders = "Нет информации";
+                        } }
+
+                    <span><b>Услуги:</b></span>
+                    <span>@orders</span>
+                </p>
+                <p>
+                    <span><b>Имеющиеся документы:</b></span>
+                    <span>@string.Join(";", Model.AvailableDocuments.Select(x => $"{x.Name} ({x.Series} {x.Number}, {x.DateOfReceiving.Value.ToString("dd.MM.yyyy")})"))</span>
+                </p>
+                <p>
+                    <span><b>Запись из архива:</b></span>
+                    <span>@Model.IsArchive</span>
+                </p>
+
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <h2>Отзыв</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <pre style="width: auto; white-space: pre-wrap;">
+@Model.Reviews
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+@Html.ActionLink("На главную", "Index", "Clients")
+
+
+<hr />
+
+
+<sub><i>Информация из государственного реестра</i></sub>

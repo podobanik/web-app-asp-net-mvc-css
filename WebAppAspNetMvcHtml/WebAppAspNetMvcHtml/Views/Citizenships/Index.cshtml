@@ -1,0 +1,33 @@
+﻿@using WebAppAspNetMvcHtml.Models
+@model List<Citizenship>
+
+<h3>Гражданства</h3>
+
+@Html.ActionLink("Добавить запись", "Create", "Citizenships")
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Страна
+            </th>
+            <th>
+                Действия
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var citizenship in Model)
+        {
+<tr>
+    <td>
+        @citizenship.Name
+    </td>
+    
+    <td>
+        @Html.ActionLink("Удалить", "Delete", "Citizenships", new { id = citizenship.Id }, new { })
+        @Html.ActionLink("Изменить", "Edit", "Citizenships", new { id = citizenship.Id }, new { })
+    </td>
+</tr>}
+    </tbody>
+</table>

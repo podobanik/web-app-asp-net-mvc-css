@@ -1,0 +1,11 @@
+﻿@using WebAppAspNetMvcHtml.Models;
+@model Citizenship
+
+<h3>Гражданство</h3>
+
+@using (Html.BeginForm("Create", "Citizenships", FormMethod.Post))
+{
+    @Html.EditorForModel()
+    <input type="submit" value="Сохранить" />
+    @Html.ActionLink("Отменить", "Index", "Citizenships")
+}
