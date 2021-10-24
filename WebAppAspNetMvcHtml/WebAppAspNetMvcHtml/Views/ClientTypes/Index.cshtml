@@ -1,7 +1,9 @@
 ﻿@using WebAppAspNetMvcHtml.Models;
 @model List<ClientType>
 
-@Html.ActionLink("Добавить тип клиента", "Create", "ClientTypes")
+<h3>Типы клиентов</h3>
+
+<button>@Html.ActionLink("Добавить тип клиента", "Create", "ClientTypes")</button>
 
 
 <table class="table table-striped table-bordered">
@@ -18,15 +20,15 @@
     <tbody>
         @foreach (var clienttype in Model)
         {
-        <tr>
-            <td>
-                @clienttype.Name
-            </td>
-            <td>
-                @Html.ActionLink("Удалить", "Delete", "ClientTypes", new { id = clienttype.Id }, new { })
-                @Html.ActionLink("Изменить", "Edit", "ClientTypes", new { id = clienttype.Id }, new { })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @clienttype.Name
+                </td>
+                <td>
+                    @Html.ActionLink("Удалить", "Delete", "ClientTypes", new { id = clienttype.Id }, new { })
+                    @Html.ActionLink("Изменить", "Edit", "ClientTypes", new { id = clienttype.Id }, new { })
+                </td>
+            </tr>
         }
     </tbody>
 </table>

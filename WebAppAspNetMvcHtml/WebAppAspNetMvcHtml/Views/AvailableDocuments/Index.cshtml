@@ -3,7 +3,7 @@
 
 <h3>Список документов</h3>
 
-@Html.ActionLink("Добавить запись", "Create", "AvailableDocuments")
+<button>@Html.ActionLink("Добавить запись", "Create", "AvailableDocuments")</button>
 
 <table class="table table-striped table-bordered">
     <thead>
@@ -28,23 +28,24 @@
     <tbody>
         @foreach (var availableDocument in Model)
         {
-        <tr>
-            <td>
-                @availableDocument.Name
-            </td>
-            <td>
-                @availableDocument.Series
-            </td>
-            <td>
-                @availableDocument.Number
-            </td>
-            <td>
-                @(availableDocument.DateOfReceiving.HasValue? availableDocument.DateOfReceiving.Value.ToString("dd.MM.yyyy") : "-")
-            </td>
-            <td>
-                @Html.ActionLink("Удалить", "Delete", "AvailableDocuments", new { id = availableDocument.Id }, new { })
-                @Html.ActionLink("Изменить", "Edit", "AvailableDocuments", new { id = availableDocument.Id }, new { })
-            </td>
-        </tr>}
+<tr>
+    <td>
+        @availableDocument.Name
+    </td>
+    <td>
+        @availableDocument.Series
+    </td>
+    <td>
+        @availableDocument.Number
+    </td>
+    <td>
+        @(availableDocument.DateOfReceiving.HasValue? availableDocument.DateOfReceiving.Value.ToString("dd.MM.yyyy") : "-")
+    </td>
+    <td>
+        @Html.ActionLink("Удалить", "Delete", "AvailableDocuments", new { id = availableDocument.Id }, new { })
+        @Html.ActionLink("Изменить", "Edit", "AvailableDocuments", new { id = availableDocument.Id }, new { })
+    </td>
+</tr>
+}
     </tbody>
 </table>

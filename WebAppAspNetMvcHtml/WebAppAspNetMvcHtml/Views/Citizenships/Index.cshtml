@@ -3,7 +3,7 @@
 
 <h3>Гражданства</h3>
 
-@Html.ActionLink("Добавить запись", "Create", "Citizenships")
+<button>@Html.ActionLink("Добавить запись", "Create", "Citizenships")</button>
 
 <table class="table table-striped table-bordered">
     <thead>
@@ -23,11 +23,12 @@
     <td>
         @citizenship.Name
     </td>
-    
+
     <td>
         @Html.ActionLink("Удалить", "Delete", "Citizenships", new { id = citizenship.Id }, new { })
         @Html.ActionLink("Изменить", "Edit", "Citizenships", new { id = citizenship.Id }, new { })
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>
