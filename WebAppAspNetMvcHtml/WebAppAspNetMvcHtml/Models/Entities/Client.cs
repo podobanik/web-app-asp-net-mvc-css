@@ -77,16 +77,16 @@ namespace WebAppAspNetMvcHtml.Models
         /// </summary>
         /// [Required]
         [ScaffoldColumn(false)]
-        public int ClientTypeId { get; set; }
+        public List<int> ClientTypeIds { get; set; }
 
         [ScaffoldColumn(false)]
-        public virtual ClientType ClientTypes { get; set; }
+        public virtual ICollection<ClientType> ClientTypes { get; set; }
 
         [Display(Name = "Тип клиента", Order = 50)]
         [UIHint("RadioList")]
-        [TargetProperty("ClientTypeId")]
+        [TargetProperty("ClientTypeIds")]
         [NotMapped]
-        public IEnumerable<SelectListItem> ClientTypeSelect
+        public IEnumerable<SelectListItem> ClientTypeDictionary
         {
             get
             {
@@ -95,9 +95,10 @@ namespace WebAppAspNetMvcHtml.Models
 
                 if (query != null)
                 {
-                    var selection = new List<SelectListItem>();
-                    selection.AddRange(query.OrderBy(d => d.Name).ToSelectList(c => c.Id, c => c.Name, c => c.Id == ClientTypeId));
-                    return selection;
+                    var Ids = query.Where(s => s.Clients.Any(ss => ss.Id == Id)).Select(s => s.Id).ToList();
+                    var dictionary = new List<SelectListItem>();
+                    dictionary.AddRange(query.ToSelectList(c => c.Id, c => $"{c.Name}", c => Ids.Contains(c.Id)));
+                    return dictionary;
                 }
 
                 return new List<SelectListItem> { new SelectListItem { Text = "", Value = "" } };
@@ -142,7 +143,7 @@ namespace WebAppAspNetMvcHtml.Models
                 {
                     var Ids = query.Where(s => s.Clients.Any(ss => ss.Id == Id)).Select(s => s.Id).ToList();
                     var dictionary = new List<SelectListItem>();
-                    dictionary.AddRange(query.ToSelectList(c => c.Id, c => $"{c.Procedure} {c.Datetime}", c => Ids.Contains(c.Id)));
+                    dictionary.AddRange(query.ToSelectList(c => c.Id, c => $"{c.Procedure}", c => Ids.Contains(c.Id)));
                     return dictionary;
                 }
 
@@ -222,7 +223,7 @@ namespace WebAppAspNetMvcHtml.Models
         /// <summary>
         /// Отзывы
         /// </summary>   
-        [Required]
+        
         [Display(Name = "Отзыв", Order = 110)]
         [UIHint("TextArea")]
         public string Reviews { get; set; }

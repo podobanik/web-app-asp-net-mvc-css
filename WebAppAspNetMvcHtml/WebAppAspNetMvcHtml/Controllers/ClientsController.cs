@@ -49,6 +49,7 @@ namespace WebAppAspNetMvcHtml.Controllers
                 };
             }
 
+
             if (model.OrderIds != null && model.OrderIds.Any())
             {
                 var orders = db.Orders.Where(s => model.OrderIds.Contains(s.Id)).ToList();
@@ -58,6 +59,16 @@ namespace WebAppAspNetMvcHtml.Controllers
             {
                 var availableDocuments = db.AvailableDocuments.Where(s => model.AvailableDocumentIds.Contains(s.Id)).ToList();
                 model.AvailableDocuments = availableDocuments;
+            }
+            if (model.ClientTypeIds != null && model.ClientTypeIds.Any())
+            {
+                var clientTypes = db.ClientTypes.Where(s => model.ClientTypeIds.Contains(s.Id)).ToList();
+                model.ClientTypes = clientTypes;
+            }
+            if (model.CitizenshipId != null && model.CitizenshipId.Any())
+            {
+                var citizenships = db.Citizenships.Where(s => model.CitizenshipId.Contains(s.Id)).ToList();
+                model.Citizenships = citizenships;
             }
             db.Clients.Add(model);
             db.SaveChanges();
@@ -143,8 +154,6 @@ namespace WebAppAspNetMvcHtml.Controllers
             destination.Age = source.Age;
             destination.Birthday = source.Birthday;
             destination.Gender = source.Gender;
-            destination.ClientTypeId = source.ClientTypeId;
-            destination.ClientTypes = source.ClientTypes;
             destination.IsArchive = source.IsArchive;
             destination.Reviews = source.Reviews;
             destination.Key = source.Key;
@@ -155,7 +164,13 @@ namespace WebAppAspNetMvcHtml.Controllers
 
             if (source.OrderIds != null && source.OrderIds.Any())
                 destination.Orders = db.Orders.Where(s => source.OrderIds.Contains(s.Id)).ToList();
-            
+
+            if (destination.ClientTypes != null)
+                destination.ClientTypes.Clear();
+
+            if (source.ClientTypeIds != null && source.ClientTypeIds.Any())
+                destination.ClientTypes = db.ClientTypes.Where(s => source.ClientTypeIds.Contains(s.Id)).ToList();
+
             if (destination.Citizenships != null)
                 destination.Citizenships.Clear();
 

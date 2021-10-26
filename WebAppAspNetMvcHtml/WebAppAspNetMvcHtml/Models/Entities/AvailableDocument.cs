@@ -18,26 +18,6 @@ namespace WebAppAspNetMvcHtml.Models
         [Display(Name = "Название", Order = 5)]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Название
-        /// </summary>    
-        [Required]
-        [Display(Name = "Серия", Order = 15)]
-        public int Series { get; set; }
-
-        /// <summary>
-        /// Название
-        /// </summary>    
-        [Required]
-        [Display(Name = "Номер", Order = 25)]
-        public int Number { get; set; }
-
-        /// <summary>
-        /// Название
-        /// </summary>    
-        [Required]
-        [Display(Name = "Дата получения", Order = 35)]
-        public DateTime? DateOfReceiving { get; set; }
 
         /// <summary>
         /// Список клиентов

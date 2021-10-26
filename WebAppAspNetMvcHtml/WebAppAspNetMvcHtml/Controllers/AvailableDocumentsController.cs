@@ -89,9 +89,7 @@ namespace WebAppAspNetMvcHtml.Controllers
         private void MappingCitizenships(AvailableDocument sourse, AvailableDocument destination)
         {
             destination.Name = sourse.Name;
-            destination.Series = sourse.Series;
-            destination.Number = sourse.Number;
-            destination.DateOfReceiving = sourse.DateOfReceiving;
+            
         }
     }
 }

@@ -14,6 +14,7 @@ namespace WebAppAspNetMvcHtml.Models
         public DbSet<ClientType> ClientTypes { get; set; }
         public DbSet<Citizenship> Citizenships { get; set; }
         public DbSet<AvailableDocument> AvailableDocuments { get; set; }
+        
         public GosuslugiContext() : base("GosuslugiEntity")
         { }
 

@@ -20,13 +20,6 @@ namespace WebAppAspNetMvcHtml.Models
         public string Procedure { get; set; }
 
         /// <summary>
-        //// Дата и время посещения
-        /// </summary>
-        [Required]
-        [Display(Name = "Дата и время посещения", Order = 10)]
-        public DateTime Datetime { get; set; }
-
-        /// <summary>
         /// Описание услуги
         /// </summary>
         

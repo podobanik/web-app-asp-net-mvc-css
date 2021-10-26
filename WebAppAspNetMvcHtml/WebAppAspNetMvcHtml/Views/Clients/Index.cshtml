@@ -66,13 +66,28 @@
                     @client.Gender.GetDisplayValue()
                 </td>
                 <td>
-                    @client.ClientTypes.Name
+                    @{ var clienttype = string.Join(", ", client.ClientTypes.Select(x => $"{x.Name}"));
+                        if (string.IsNullOrEmpty(clienttype))
+                        {
+                            clienttype = "Нет информации";
+                        } }
+                    @clienttype
                 </td>
                 <td>
-                    @string.Join(", ", client.Citizenships.Select(x => $"{x.Name}"))
+                    @{ var citizenships = string.Join(", ", client.Citizenships.Select(x => $"{x.Name}"));
+                        if (string.IsNullOrEmpty(citizenships))
+                        {
+                            citizenships = "Нет информации";
+                        } }
+                    @citizenships
                 </td>
                 <td>
-                    @string.Join(", ", client.Orders.Select(x => $"{x.Procedure} {x.Datetime.ToString("dd.MM.yyyy HH:mm")}"))
+                    @{ var orders = string.Join(", ", client.Orders.Select(x => $"{x.Procedure}"));
+                        if (string.IsNullOrEmpty(orders))
+                        {
+                            orders = "Нет информации";
+                        } }
+                    @orders
                 </td>
                 <td>
                     @Html.ActionLink("Подробнее", "Detail", "Clients", new { id = client.Id }, new { })
@@ -83,3 +98,4 @@
         }
     </tbody>
 </table>
+<footer>Информация из государственного реестра</footer>

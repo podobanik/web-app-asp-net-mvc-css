@@ -12,15 +12,6 @@
                 Название
             </th>
             <th>
-                Серия
-            </th>
-            <th>
-                Номер
-            </th>
-            <th>
-                Дата получения
-            </th>
-            <th>
                 Действия
             </th>
         </tr>
@@ -31,15 +22,6 @@
 <tr>
     <td>
         @availableDocument.Name
-    </td>
-    <td>
-        @availableDocument.Series
-    </td>
-    <td>
-        @availableDocument.Number
-    </td>
-    <td>
-        @(availableDocument.DateOfReceiving.HasValue? availableDocument.DateOfReceiving.Value.ToString("dd.MM.yyyy") : "-")
     </td>
     <td>
         @Html.ActionLink("Удалить", "Delete", "AvailableDocuments", new { id = availableDocument.Id }, new { })

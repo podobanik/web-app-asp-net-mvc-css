@@ -91,7 +91,6 @@ namespace WebAppAspNetMvcHtml.Controllers
         private void MappingOrder(Order source, Order destination)
         {
             destination.Procedure = source.Procedure;
-            destination.Datetime = source.Datetime;
             destination.Description = source.Description;
         }
 

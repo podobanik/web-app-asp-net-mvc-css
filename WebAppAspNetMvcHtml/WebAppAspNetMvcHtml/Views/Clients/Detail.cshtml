@@ -22,15 +22,20 @@
                 </p>
                 <p>
                     <span><b>Дата рождения:</b></span>
-                    <span>@(Model.Birthday.HasValue? Model.Birthday.Value.ToString("dd.MM.yyyy") : "-")</span>
+                    <span>@(Model.Birthday.HasValue ? Model.Birthday.Value.ToString("dd.MM.yyyy") : "-")</span>
                 </p>
                 <p>
                     <span><b>Пол:</b></span>
                     <span>@Model.Gender.GetDisplayValue()</span>
                 </p>
                 <p>
+                    @{ var clienttype = string.Join(", ", Model.ClientTypes.Select(x => $"{x.Name}"));
+                        if (string.IsNullOrEmpty(clienttype))
+                        {
+                            clienttype = "Нет информации";
+                        } }
                     <span><b>Тип клиента:</b></span>
-                    <span>@Model.ClientTypes.Name</span>
+                    <span>@clienttype</span>
                 </p>
                 <p>
                     @{ var citizenships = string.Join(", ", Model.Citizenships.Select(x => $"{x.Name}"));
@@ -39,11 +44,11 @@
                             citizenships = "Нет информации";
                         } }
 
-                    <span><sup><b>Гражданство:</b></sup></span>
+                    <span><b>Гражданство:</b></span>
                     <span>@citizenships</span>
                 </p>
                 <p>
-                    @{ var orders = string.Join(", ", Model.Orders.Select(x => $"{x.Procedure} {x.Datetime.ToString("dd.MM.yyyy H:mm")}"));
+                    @{ var orders = string.Join(", ", Model.Orders.Select(x => $"{x.Procedure}"));
                         if (string.IsNullOrEmpty(orders))
                         {
                             orders = "Нет информации";
@@ -53,12 +58,27 @@
                     <span>@orders</span>
                 </p>
                 <p>
+                    @{ var availableDocuments = string.Join(",", Model.AvailableDocuments.Select(x => $"{x.Name}"));
+                        if (string.IsNullOrEmpty(availableDocuments))
+                        {
+                            availableDocuments = "Нет информации";
+                        } }
                     <span><b>Имеющиеся документы:</b></span>
-                    <span>@string.Join(";", Model.AvailableDocuments.Select(x => $"{x.Name} ({x.Series} {x.Number}, {x.DateOfReceiving.Value.ToString("dd.MM.yyyy")})"))</span>
+                    <span>@availableDocuments</span>
                 </p>
                 <p>
+                    @{ string isArchive;
+                        if (Model.IsArchive == true)
+                        {
+                           isArchive = "Да";
+                        }
+                        else
+                        {
+                           isArchive = "Нет";
+                        }
+                    }
                     <span><b>Запись из архива:</b></span>
-                    <span>@Model.IsArchive</span>
+                    <span>@isArchive</span>
                 </p>
 
 
@@ -81,7 +101,7 @@
 </table>
 
 
-@Html.ActionLink("На главную", "Index", "Clients")
+<a>@Html.ActionLink("На главную", "Index", "Clients")</a>
 
 
 <hr />
